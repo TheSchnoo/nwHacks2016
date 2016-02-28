@@ -1,0 +1,110 @@
+body{
+	width: 100%;
+}
+
+#welcome-banner{
+	width: 100%;
+}
+
+img#landing-image{
+	height: 300px;
+	width: auto;
+}
+
+.card-media {
+  background-color: #999999;
+  height: 100px;
+}
+
+.beer-card {
+	height: 250px;
+	width: 500px;
+	float: left;
+}
+
+.team-info{
+	margin-bottom: 20px;
+}
+
+
+
+#welcome-banner {
+	position: relative;
+}
+
+md-list{
+	padding-left: 10px;
+	padding-right: 10px;
+	width: 466px;
+}
+
+#brewmaster-logo {
+    position: absolute;
+    top: 30%;
+    color: white;
+    font-family: sans-serif;
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+#subheading{
+	position: absolute;
+	top: 60%;
+	left: 45%;
+	color: white;
+}
+
+.beer-image{
+	height:173px;
+}
+
+.team-member{
+	border-style: solid;
+}
+
+.team-one{
+	width: 50%;
+}
+
+.md-list-item-text{
+	margin-left: 40px;
+}
+
+.team-member{
+	margin-bottom: 20px;
+}
+
+.md-list-item-text{
+	padding-left: 70px;
+}
+
+h3 span {
+	font-size: 30;
+
+}
+
+h2 div {
+	margin-bottom: 0px;
+}
+
+div h2 {
+	margin-top: 0px;
+}
+
+md-list-item img{
+	margin-bottom: 5px;
+	margin-top: 10px;
+}
+
+md-list-item:nth-child(even) {
+    background: #ff0000;
+}
+
+md-list-item.md-2-line.team-info.md-no-proxy {
+    padding-left: 64px;
+}
+
+#team-one-info{
+	padding-left: 20px;
+}
