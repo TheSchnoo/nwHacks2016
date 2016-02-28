@@ -1,9 +1,10 @@
 body{
 	width: 100%;
+    background-color:#3B3738;
 }
 
 #welcome-banner{
-	width: 100%;
+    width: fill_parent;
 }
 
 img#landing-image{
@@ -26,7 +27,9 @@ img#landing-image{
 	margin-bottom: 20px;
 }
 
-
+#back{
+    background-color:#C63D0F;
+}
 
 #welcome-banner {
 	position: relative;
@@ -57,6 +60,10 @@ md-list{
 
 .beer-image{
 	height:173px;
+}
+
+.ng-scope{
+    background-color:white;
 }
 
 .team-member{
@@ -107,4 +114,14 @@ md-list-item.md-2-line.team-info.md-no-proxy {
 
 #team-one-info{
 	padding-left: 20px;
+    background-color:#FDF3E7;
+}
+
+#team-two-info{
+    padding-left: 20px;
+    background-color:#FDF3E7;
+}
+
+#center-div{
+    margin: 0 auto;
 }
