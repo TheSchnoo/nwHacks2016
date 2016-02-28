@@ -8,7 +8,7 @@ var refreshURL = "https://api.fitbit.com/oauth2/token?grant_type=refresh_token&r
 var accessToken = "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE0NTY2NjM2NDUsInNjb3BlcyI6InJhY3QiLCJzdWIiOiI0Q1E0QzYiLCJhdWQiOiIyMjdHVjQiLCJpc3MiOiJGaXRiaXQiLCJ0eXAiOiJhY2Nlc3NfdG9rZW4iLCJpYXQiOjE0NTY2NjAwNDV9.ILDuUnNqGrHLt0tQ84eKkxLyOhPIedSV9gypbIVEjvc";
 
 function start(){
-	getStepInfo();
+	setInterval(getStepInfo, 2000);
 }
 
 function refreshAccessToken(refToken){
