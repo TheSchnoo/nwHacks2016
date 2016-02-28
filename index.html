@@ -1,9 +1,11 @@
 <html>
-<header>
-<script src="https://cdn.firebase.com/js/client/2.4.1/firebase.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="/resources/tutorial/css/example.css"></header>
+<head>
+  <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/resources/tutorial/css/example.css">
+</head>
 <body>
+
 <div class="example-base example-leaderboard l-demo-container">
   <table id="leaderboardTable">
     <tr>
@@ -17,11 +19,10 @@
   </footer>
 </div>
 <script>
-  var Firebase = require("firebase");
   var LEADERBOARD_SIZE = 5;
 
   // Create our Firebase reference
-  var scoreListRef = new Firebase('https://glowing-heat-1885.firebaseio.com/');
+  var scoreListRef = new Firebase('https://glowing-heat-1885.firebaseapp.com//scoreList');
 
   // Keep a mapping of firebase locations to HTML elements, so we can move / remove elements as necessary.
   var htmlForPath = {};
