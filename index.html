@@ -5,6 +5,7 @@
   <!-- Angular Material style sheet -->
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Lora:700' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 
@@ -14,8 +15,8 @@
     <!-- Top banner -->
     <div id="welcome-banner">
       <img id="landing-image" src="images/running.jpg">
-      <h1 id="brewmaster-logo">Welcome to Placeholder</h1>
-      <h3 id="subheading">Helping us live healthier lives.</h3>
+      <h1 id="brewmaster-logo">Welcome to Stepic</h1>
+      <h3 id="subheading">Living healthier than your friends.</h3>
     </div>
 
     <div id="teams" layout="row">
@@ -27,12 +28,12 @@
             <md-list-item class="md-2-line team-info">
               <img src="images/java.png">
               <div class="md-list-item-text">
-                <h2>Team{{teamOne.teamName}} </h2>
+                <h2>{{teamOne.teamName}} </h2>
                 <h3><span>{{teamOne.teamTotal}}</span> steps</h3>
               </div>
             </md-list-item>
             <div data-ng-repeat="member in teamOne.members">
-              <md-list-item class="md-2-line team-member">
+              <md-list-item class="md-2-line team-member team-member-one">
                 <!-- addd image info here-->
                 <img src='{{member.img}}'>
                 <div class = "md-list-item-text">
@@ -49,14 +50,14 @@
         <md-content>
           <md-list id="team-two-info">
             <md-list-item class="md-2-line team-info">
-              <img src="images/c++.png">
+              <img src="images/pokeball.png">
               <div class="md-list-item-text">
-                <h2>Team {{teamTwo.teamName}}</h2>
+                <h2>{{teamTwo.teamName}}</h2>
                 <h3><span>{{teamTwo.teamTotal}}</span> steps</h3>
               </div>
             </md-list-item>
             <div data-ng-repeat="member in teamTwo.members">
-              <md-list-item class="md-2-line team-member">
+              <md-list-item class="md-2-line team-member team-member-two">
                 <!-- addd image info here-->
                 <img src='{{member.img}}'>
                 <div class = "md-list-item-text">
