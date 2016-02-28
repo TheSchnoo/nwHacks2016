@@ -10,16 +10,15 @@
 
 <body ng-app="Brewmaster" ng-cloak>
 
-  <div ng-controller="AppCtrl" ng-cloak >
+  <div id="back" ng-controller="AppCtrl" ng-cloak >
     <!-- Top banner -->
     <div id="welcome-banner">
       <img id="landing-image" src="images/running.jpg">
       <h1 id="brewmaster-logo">Welcome to Placeholder</h1>
       <h3 id="subheading">Helping us live healthier lives.</h3>
     </div>
-
     <div id="teams" layout="row">
-
+      <div id="center-div" layout="row">
 
       <div id="team-one">
         <md-content>
@@ -34,11 +33,10 @@
             <div data-ng-repeat="member in teamOne.members">
               <md-list-item class="md-2-line team-member">
                 <!-- addd image info here-->
-                <!-- <img src="images/wes.jpg"> -->
-                <img src="{{member.img}}">
+                <img src='{{member.img}}'>
                 <div class = "md-list-item-text">
                   <h2>{{member.name}}</h2>
-                  <h3><span>{{member.steps}}</span>steps</h3>
+                  <h3><span>{{member.steps}}</span> steps</h3>
                 </div>
                 </md-list-item>
             </div>
@@ -59,17 +57,17 @@
             <div data-ng-repeat="member in teamTwo.members">
               <md-list-item class="md-2-line team-member">
                 <!-- addd image info here-->
-                <img src="{{member.img}}">
-                <!-- {{member.img}} -->
+                <img src='{{member.img}}'>
                 <div class = "md-list-item-text">
                   <h2>{{member.name}}</h2>
-                  <h3><span>{{member.steps}}</span>steps</h3>
+                  <h3><span>{{member.steps}}</span> steps</h3>
                 </div>
                 </md-list-item>
             </div>
           </md-list>
         </md-content>
       </div>
+    </div>
     </div>
   </div>
 
