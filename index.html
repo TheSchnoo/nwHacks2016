@@ -5,25 +5,24 @@
 </header>
 <body>
    <div id='messagesDiv'></div>
-    <input type='text' id='nameInput' placeholder='Name'>
-    <input type='text' id='messageInput' placeholder='Message'>
     <script>
       var myDataRef = new Firebase('https://glowing-heat-1885.firebaseio.com/');
-      $('#messageInput').keypress(function (e) {
-        if (e.keyCode == 13) {
-          var name = $('#nameInput').val();
-          var text = $('#messageInput').val();
-          myDataRef.push({name: name, text: text});
-          $('#messageInput').val('');
-        }
+      myDataRef.on('value', function(snapshot) {
+      	snapshot.forEach(function(data) {
+      		getTeamInfo(data.key());	// data.key() here is the team name
+      	});
       });
-      myDataRef.child('name').on('value', function(snapshot) {
-        var message = snapshot.val();
-      	displayChatMessage(message);
-      });
-      function displayChatMessage(name, text) {
+
+      function getTeamInfo(team){
+      	myDataRef.child(team).on('value', function(snapshot) {
+	        snapshot.forEach(function(data) {
+	      		displayChatMessage(data.key(), data.val());		// data.key() here is the member name and 													 data.val() is the number of steps
+	      	});
+      	});
+      };
+      function displayChatMessage(name, value) {
       	debugger;
-        $('<div/>').text(text).prepend($('<em/>').text(name+': ')).appendTo($('#messagesDiv'));
+        $('<div/>').text(value).prepend($('<em/>').text(name+': ')).appendTo($('#messagesDiv'));
         $('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
       };
     </script>
