@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.firebase.client.Firebase;
 
@@ -23,12 +24,14 @@ public class SendInformation extends Activity implements SensorEventListener{
     Firebase myFirebaseRef;
     String user;
     String team;
+    TextView stepCountText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Firebase.setAndroidContext(this);
         setContentView(R.layout.activity_send_information);
+        stepCountText = (TextView) findViewById(R.id.stepCountText);
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         accellSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
         sensorManager.registerListener(this, accellSensor, SensorManager.SENSOR_DELAY_NORMAL);
@@ -47,6 +50,7 @@ public class SendInformation extends Activity implements SensorEventListener{
         Map<String, Object> steps = new HashMap<>();
         steps.put("steps", stepValue);
         charmanderRef.updateChildren(steps);
+        stepCountText.setText(String.valueOf(stepValue));
     }
 
     @Override
