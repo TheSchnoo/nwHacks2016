@@ -115,6 +115,9 @@ md-list-item:nth-child(even) {
 md-list-item.md-2-line.team-info.md-no-proxy {
     padding-left: 64px;
 }
+.overlay{
+  z-index: 10;
+}
 
 #team-one-info{
 	padding-left: 20px;
@@ -125,7 +128,13 @@ md-list-item.md-2-line.team-info.md-no-proxy {
     padding-left: 20px;
     background-color:#FDF3E7;
 }
-
+#showdown{
+    position: absolute;
+    top: 90%;
+    width: 30%;
+    margin-left: 35%;
+    margin-right: 35%;
+}
 #center-div{
     margin: 0 auto;
 }

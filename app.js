@@ -45,7 +45,21 @@ app.controller('AppCtrl', function($scope, $firebaseObject) {
 
 		  	
 		});
+	}
+	function myFunction() {
+	    document.getElementById("demo").innerHTML = "Hello World";
+	}
+	function displaySelectedMember(team1, team2){
+		var team1Member = selectRandomMember(team1);
+		var team2Member = selectRandomMember(team2);
+		document.getElementById("demo1").innerHTML = team1Member.steps;
+		document.getElementById("demo2").innerHTML = team2Member.steps;
+	}
 
+	function selectRandomMember(team){
+		var teamMember = Math.round(Math.random()*5);
+		return team[teamMember];
+	}
 
 
 
@@ -77,7 +91,7 @@ app.controller('AppCtrl', function($scope, $firebaseObject) {
 		 //  		return (teamJson);
 			  	
 			//  });
-		}
+		
 
 
 
@@ -107,11 +121,8 @@ app.controller('AppCtrl', function($scope, $firebaseObject) {
 				member.name = key;
 				member.steps = team[key]['steps'];
 				member.img = team[key]['img']
-				members.push(member);
-
-				
+				members.push(member);				
 			}
-
       }
 	  	
 
