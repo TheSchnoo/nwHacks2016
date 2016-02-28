@@ -1,95 +1,96 @@
-<html>
+
+<html lang="en" >
 <head>
-  <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="/resources/tutorial/css/example.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Angular Material style sheet -->
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
-<body>
 
-<div class="example-base example-leaderboard l-demo-container">
-  <table id="leaderboardTable">
-    <tr>
-      <th>Player</th>
-      <th>Score</th>
-    </tr>
-  </table>
-  <footer>
-    <input class="example-leaderboard-name" type="text" id="nameInput" placeholder="Enter a name">
-    <input class="example-leaderboard-score" type="text" id="scoreInput" placeholder="Record your score...">
-  </footer>
-</div>
-<script>
-  var LEADERBOARD_SIZE = 5;
+<body ng-app="Brewmaster" ng-cloak>
+  <div ng-controller="AppCtrl" ng-cloak >
+    <!-- Top banner -->
+    <div id="welcome-banner">
+      <img id="landing-image" src="images/running.jpg">
+      <h1 id="brewmaster-logo">Welcome to Placeholder</h1>
+      <h3 id="subheading">Helping us live healthier lives.</h3>
+    </div>
 
-  // Create our Firebase reference
-  var scoreListRef = new Firebase('https://glowing-heat-1885.firebaseapp.com//scoreList');
+    <div id="teams" layout="row">
 
-  // Keep a mapping of firebase locations to HTML elements, so we can move / remove elements as necessary.
-  var htmlForPath = {};
 
-  // Helper function that takes a new score snapshot and adds an appropriate row to our leaderboard table.
-  function handleScoreAdded(scoreSnapshot, prevScoreName) {
-    var newScoreRow = $("<tr/>");
-    newScoreRow.append($("<td/>").append($("<em/>").text(scoreSnapshot.val().name)));
-    newScoreRow.append($("<td/>").text(scoreSnapshot.val().score));
+      <div id="team-one">
+        <md-content>
+          <md-list id="team-one-info">
+            <md-list-item class="md-2-line team-info">
+              <img src="images/java.png">
+              <div class="md-list-item-text">
+                <h2>Team{{teamOne.teamName}} </h2>
+                <h3><span>{{teamOne.teamTotal}}</span>steps</h3>
+              </div>
+            </md-list-item>
+            <div data-ng-repeat="member in teamOne.members">
+              <md-list-item class="md-2-line team-member">
+                <!-- addd image info here-->
+                <img src="images/alvin.jpg">
+                <div class = "md-list-item-text">
+                  <h2>{{member.name}}</h2>
+                  <h3><span>{{member.steps}}</span>steps</h3>
+                </div>
+            </div>
+          </md-list>
+        </md-content>
+      </div>
 
-    // Store a reference to the table row so we can get it again later.
-    htmlForPath[scoreSnapshot.key()] = newScoreRow;
+      <div id="team-two">
+        <md-content>
+          <md-list id="team-two-info">
+            <md-list-item class="md-2-line team-info">
+              <img src="images/c++.png">
+              <div class="md-list-item-text">
+                <h2>Team {{teamTwo.teamName}}</h2>
+                <h3><span>{{teamTwo.teamTotal}}</span> steps<h3>
+              </div>
+            </md-list-item>
+            <div data-ng-repeat="member in teamTwo.members">
+              <md-list-item class="md-2-line team-member">
+                <!-- addd image info here-->
+                <img src="images/alvin.jpg">
+                <div class = "md-list-item-text">
+                  <h2>{{member.name}}</h2>
+                  <h3><span>{{member.steps}}</span>steps</h3>
+                </div>
+            </div>
+          </md-list>
+        </md-content>
+      </div>
+  </div>
 
-    // Insert the new score in the appropriate place in the table.
-    if (prevScoreName === null) {
-      $("#leaderboardTable").append(newScoreRow);
-    }
-    else {
-      var lowerScoreRow = htmlForPath[prevScoreName];
-      lowerScoreRow.before(newScoreRow);
-    }
-  }
 
-  // Helper function to handle a score object being removed; just removes the corresponding table row.
-  function handleScoreRemoved(scoreSnapshot) {
-    var removedScoreRow = htmlForPath[scoreSnapshot.key()];
-    removedScoreRow.remove();
-    delete htmlForPath[scoreSnapshot.key()];
-  }
+      
+    
 
-  // Create a view to only receive callbacks for the last LEADERBOARD_SIZE scores
-  var scoreListView = scoreListRef.limitToLast(LEADERBOARD_SIZE);
 
-  // Add a callback to handle when a new score is added.
-  scoreListView.on('child_added', function (newScoreSnapshot, prevScoreName) {
-    handleScoreAdded(newScoreSnapshot, prevScoreName);
-  });
 
-  // Add a callback to handle when a score is removed
-  scoreListView.on('child_removed', function (oldScoreSnapshot) {
-    handleScoreRemoved(oldScoreSnapshot);
-  });
 
-  // Add a callback to handle when a score changes or moves positions.
-  var changedCallback = function (scoreSnapshot, prevScoreName) {
-    handleScoreRemoved(scoreSnapshot);
-    handleScoreAdded(scoreSnapshot, prevScoreName);
-  };
-  scoreListView.on('child_moved', changedCallback);
-  scoreListView.on('child_changed', changedCallback);
 
-  // When the user presses enter on scoreInput, add the score, and update the highest score.
-  $("#scoreInput").keypress(function (e) {
-    if (e.keyCode == 13) {
-      var newScore = Number($("#scoreInput").val());
-      var name = $("#nameInput").val();
-      $("#scoreInput").val("");
+  
+  <!-- Angular Material requires Angular.js Libraries -->
+  <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
 
-      if (name.length === 0)
-        return;
+  <!-- Angular Material Library -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+  
 
-      var userScoreRef = scoreListRef.child(name);
 
-      // Use setWithPriority to put the name / score in Firebase, and set the priority to be the score.
-      userScoreRef.setWithPriority({ name:name, score:newScore }, newScore);
-    }
-  });
-</script>
+  <script src="app.js"></script>
+  
 </body>
 </html>
+
