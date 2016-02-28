@@ -16,7 +16,7 @@
       function getTeamInfo(team){
       	myDataRef.child(team).on('value', function(snapshot) {
 	        snapshot.forEach(function(data) {
-	      		displayChatMessage(data.key(), data.val());		// data.key() here is the member name and 													 data.val() is the number of steps
+	      		displayChatMessage(data.key(), data.child('steps').val());		
 	      	});
       	});
       };
