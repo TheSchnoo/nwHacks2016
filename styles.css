@@ -53,11 +53,11 @@ md-list{
 
 #subheading{
 	position: absolute;
-	top: 78%;
+	top: 76%;
 	left: 5%;
 	color: white;
     -webkit-text-stroke: 1px black;
-    font-size: 28;
+    font-size: 27;
 }
 
 .beer-image{
