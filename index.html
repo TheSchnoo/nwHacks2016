@@ -34,7 +34,7 @@
             <div data-ng-repeat="member in teamOne.members">
               <md-list-item class="md-2-line team-member">
                 <!-- addd image info here-->
-                <img src="images/alvin.jpg">
+                <img src='{{member.img}}'>
                 <div class = "md-list-item-text">
                   <h2>{{member.name}}</h2>
                   <h3><span>{{member.steps}}</span>steps</h3>
@@ -58,7 +58,7 @@
             <div data-ng-repeat="member in teamTwo.members">
               <md-list-item class="md-2-line team-member">
                 <!-- addd image info here-->
-                <img src="images/alvin.jpg">
+                <img src='{{member.img}}'>
                 <div class = "md-list-item-text">
                   <h2>{{member.name}}</h2>
                   <h3><span>{{member.steps}}</span>steps</h3>
