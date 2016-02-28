@@ -101,8 +101,13 @@ md-list{
 	padding-left: 70px;
 }
 
+.team-steps{
+    font-size:30px;
+    font-weight: bold;
+}
+
 h3 span {
-	font-size: 30;
+	font-size: 25;
 
 }
 
