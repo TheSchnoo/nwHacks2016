@@ -20,7 +20,10 @@ app.controller('AppCtrl', function($scope, $firebaseObject) {
 	// 	setScopeTeams();
 	// }
 
+
+
 	function setScopeTeams(){
+		console.log('settingScopeTeams');
 
 		obj.$loaded().then(function(){
 			// console.log(obj);
@@ -42,6 +45,11 @@ app.controller('AppCtrl', function($scope, $firebaseObject) {
 			members = [];
 			teamJson.teamTotal = teamTotal;
 			$scope.teamTwo = teamJson;
+
+			setTimeout(function() {
+  				setScopeTeams();
+
+			}, 5000);
 
 		  	
 		});
