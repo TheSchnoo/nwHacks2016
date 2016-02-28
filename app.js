@@ -1,138 +1,118 @@
-var mockMode = true;
-var app = angular.module('Brewmaster', ['ngMaterial']);
 
-app.controller('AppCtrl', function($scope) {
-	if (mockMode) {
-		$scope.teamOne =
-			{
-			 	"teamName": "Java",
-			 	"members": [
-				 	{
-				 		"name": "NullPointerException",
-				 		"steps": 5004
-				 	},
-			 		{
-			 			"name": "Syntax Error",
-			 			"steps": 6001
-			 		},
-			 		{
-			 			"name": "ArrayOutOfBounds",
-			 			"steps": 1005
-			 		},
-			 		{
-			 			"name": "Placeholder",
-			 			"steps" : 11532
-			 		},
-			 		{
-			 			"name": "Lazy Placeholder",
-			 			"steps": 421
-			 		}
-			 	],
-			 	"teamTotal": 24062
-			}
-		$scope.teamTwo = 
-			{
-			 	"teamName": "C++",
-			 	"members": [
-			 		{
-			 			"name": "Does not compile",
-			 			"steps": 9001
-			 		},
-			 		{
-			 			"name": "Segmentation fault",
-			 			"steps": 1432
-			 		},
-			 		{
-			 			"name": "Memory leak",
-			 			"steps": 5281
-			 		},
-			 		{
-			 			"name": "Malloc",
-			 			"steps": 5219
-			 		},
-			 		{
-			 			"name": "Placeholder",
-			 			"steps": 3152
-			 		}
-			 	],
-			 	"teamTotal": 24085
-			}
-	  	} else {
+var app = angular.module("Brewmaster", ["ngMaterial", "firebase"]);
 
+app.controller('AppCtrl', function($scope, $firebaseObject) {
 
-
-
-
-
-
-
-
-
-	  		
 	var myDataRef = new Firebase('https://glowing-heat-1885.firebaseio.com/');
-      var teamJson;
-      var teamTotal;
-      myDataRef.on('value', function(snapshot) {
-        var teamNumber = 1;
-        var team1;
-        var team2;
-        snapshot.forEach(function (data) {
-          teamJson = '{';
-          teamJson += '"teamName" : "' + data.key() + '" ,'
-                  + '"members": [';
-          teamTotal = 0;
-          getTeamInfo(data.key());	// data.key() here is the team name
-          teamJosn += '],'
-                  + '"teamTotal": "' + teamTotal + '" ,'
-                  + '}';
-          if (teamNumber == 1) {
-            team1 = teamJson;
-          } else {
-            team2 = teamJson;
-          }
-            teamTotal = 0;
-        });
-        if (whichTeam == 1) {
-          console.log(team1);
-          return team1;
-        } else if (whichTeam == 2) {
-          return team2;
-        }
-        ;
-      });
+	var obj = $firebaseObject(myDataRef);
+	var teamJson;
+	var teamTotal = 0;
+	var members = [];
+	var teamOne = {};
+	// console.log("team one: " + teamOne);
+	// console.log($scope.teamOne);
+	// $scope.teamTwo = {};
 
-      function getTeamInfo(team){
-      	myDataRef.child(team).on('value', function(snapshot) {
-	        snapshot.forEach(function(data) {
-              teamTotal+= data.child('steps').val();
-              teamJson += '"name" : "' + data.key() + '" ,'
-                      + '"steps" : "' + data.child('steps').val() + '" ,';
-              displayChatMessage(data.key(), data.child('steps').val());		// data.key() here is the member name and 													 data.val() is the number of steps
+	setScopeTeams();
+	// console.log($scope.teamOne);
 
-	      	  	});
-      	});
-      };
-      function displayChatMessage(name, value) {
-      	debugger;
-        $('<div/>').text(value).prepend($('<em/>').text(name+': ')).appendTo($('#messagesDiv'));
-        $('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
-      };
-      function createJSON() {
-        var teamTotal = 0;
-        var teams = '{';
-        //iterate through teams doing the following with each iteration
-        teams += '"teamName" : "' + teamName + '" ,'
-                + '"members": [';
-        teamSteps = 0;
-        //iterate through team members doing the following with each iteration
-        teams += +'"name" : "' + name + '" ,'
-                + '"steps" : "' + steps + '" ,';
-        teamTotal += steps;
-        teams += '],'
-                + '"teamTotal": "' + teamTotal + '" ,'
-                + '}';
-        var jsonObject = JSON.parse(teams);
-      }  		
-	  	}
+	// function activate() {
+	// 	setScopeTeams();
+	// }
+
+	function setScopeTeams(){
+
+		obj.$loaded().then(function(){
+			// console.log(obj);
+			var teamOne = obj.Team_1;
+			teamJson = {};
+			teamJson.teamName = "Team 1";
+			getAllMembers(teamOne);
+			teamJson.members = members;
+			members = [];
+			teamJson.teamTotal = teamTotal;
+			teamTotal = 0;
+			$scope.teamOne = teamJson;
+
+			var teamTwo = obj.Team_2;
+			teamJson = {};
+			teamJson.teamName = "Team 2";
+			getAllMembers(teamTwo);
+			teamJson.members = members;
+			members = [];
+			teamJson.teamTotal = teamTotal;
+			$scope.teamTwo = teamJson;
+
+		  	
+		});
+
+
+
+
+			// $scope.teamOne = result;
+			// on('value', function(snapshot) {
+			// console.log(snapshot);
+			// var teamNumber = 1;
+			// var team1;
+			// var team2;
+			// snapshot.forEach(function(data) {
+
+		 //  		var team;
+	  // 			team = "Team 1";
+	  // 			teamJson = {};
+		 //  		teamJson.teamName = team;
+		 //  		// console.log(teamJson.teamName);
+		
+		 //  		getAllMembers(data.key())
+		 //  			.then(function(result) {
+	  // 				console.log('result is:', result);
+		 //  		});
+
+		 //  		teamJson.teamTotal = teamTotal;
+		 //  		teamTotal = 0;
+		 //  		teamJson.members = members;
+		 //  		members = [];
+		 //  		// console.log(teamJson);
+		 //  		$scope.teamOne = teamJson;
+		 //  		return (teamJson);
+			  	
+			//  });
+		}
+
+
+
+
+	  		// } else {
+	  		// 	team = "Team 2";
+	  		// 	teamJson = {};
+		  	// 	teamJson.teamName = team;
+		  	// 	getAllMembers(data.key());
+		  	// 	teamJson.teamTotal = teamTotal;
+		  	// 	teamJson.members = members;
+		  	// 	members = [];
+		  	// 	// console.log(teamJson);
+		  	// 	$scope.teamTwo = teamJson;
+		  	// 	console.log($scope.teamTwo);
+	  		// }
+
+	    //   });
+
+
+
+	function getAllMembers(team){
+		// myDataRef.child(team).on('value', function() {
+			for (key in team) {
+				teamTotal+= team[key]['steps'];
+				var member = {};
+				member.name = key;
+				member.steps = team[key]['steps'];
+				member.img = team[key]['img']
+				members.push(member);
+
+				
+			}
+
+      }
+	  	
 
 });
