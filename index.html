@@ -7,17 +7,46 @@
    <div id='messagesDiv'></div>
     <script>
       var myDataRef = new Firebase('https://glowing-heat-1885.firebaseio.com/');
+      var teamJson;
+      var teamTotal;
       myDataRef.on('value', function(snapshot) {
-      	snapshot.forEach(function(data) {
-      		getTeamInfo(data.key());	// data.key() here is the team name
-      	});
+        var teamNumber = 1;
+        var team1;
+        var team2;
+        snapshot.forEach(function (data) {
+          teamJson = '{';
+          teamJson += '"teamName" : "' + data.key() + '" ,'
+                  + '"members": [';
+          teamTotal = 0;
+          getTeamInfo(data.key());	// data.key() here is the team name
+          teamJosn += '],'
+                  + '"teamTotal": "' + teamTotal + '" ,'
+                  + '}';
+          if (teamNumber == 1) {
+            team1 = teamJson;
+          } else {
+            team2 = teamJson;
+          }
+            teamTotal = 0;
+        });
+        if (whichTeam == 1) {
+          console.log(team1);
+          return team1;
+        } else if (whichTeam == 2) {
+          return team2;
+        }
+        ;
       });
 
       function getTeamInfo(team){
       	myDataRef.child(team).on('value', function(snapshot) {
 	        snapshot.forEach(function(data) {
-	      		displayChatMessage(data.key(), data.val());		// data.key() here is the member name and 													 data.val() is the number of steps
-	      	});
+              teamTotal+= data.child('steps').val();
+              teamJson += '"name" : "' + data.key() + '" ,'
+                      + '"steps" : "' + data.child('steps').val() + '" ,';
+              displayChatMessage(data.key(), data.child('steps').val());		// data.key() here is the member name and 													 data.val() is the number of steps
+
+	      	  	});
       	});
       };
       function displayChatMessage(name, value) {
