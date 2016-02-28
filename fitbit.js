@@ -71,8 +71,8 @@ function getStepInfo(){
 
 function setToFirebase(steps){
 	var step = steps;
-	var Team1Ref = myFirebaseRef.child("Team_1");
-	var alvinRef = Team1Ref.child("Alvin");
+	var Team1Ref = myFirebaseRef.child("Team_2");
+	var alvinRef = Team1Ref.child("Charmander");
 	alvinRef.update({
 		"steps": step
 	});
