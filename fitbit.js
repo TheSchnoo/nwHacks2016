@@ -5,10 +5,10 @@ var refreshToken = "93aa6e837ec39de03c318f28da93d9d4b36219aca447554049a229356877
 var encodedDev = "MjI3R1Y0OjNjNmFjMGJjODkxOWU2ZjNhZDExMjI5YmM4YTk5MmMw";
 var today = "2016-02-28";
 var refreshURL = "https://api.fitbit.com/oauth2/token?grant_type=refresh_token&refresh_token=";
-var accessToken = "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE0NTY2ODkxMTMsInNjb3BlcyI6InJhY3QiLCJzdWIiOiI0Q1E0QzYiLCJhdWQiOiIyMjdHVjQiLCJpc3MiOiJGaXRiaXQiLCJ0eXAiOiJhY2Nlc3NfdG9rZW4iLCJpYXQiOjE0NTY2ODU1MTN9.ywYW5eBbTpqZfauKSJ7rHhytMdvnXXD7tHkFl1s5rm8";
+var accessToken = "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE0NTY2OTU5MTEsInNjb3BlcyI6InJhY3QiLCJzdWIiOiI0Q1E0QzYiLCJhdWQiOiIyMjdHVjQiLCJpc3MiOiJGaXRiaXQiLCJ0eXAiOiJhY2Nlc3NfdG9rZW4iLCJpYXQiOjE0NTY2OTIzMTF9.EIEPDgDfDdTzIii_An5_McX6ZYafeEE1-BarZ2LQ1Cc";
 
 function start(){
-	setInterval(getStepInfo, 5000);
+	setInterval(getStepInfo, 25000);
 }
 
 function refreshAccessToken(refToken){
