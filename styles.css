@@ -149,3 +149,7 @@ md-list-item.md-2-line.team-info.md-no-proxy {
 #center-div{
     margin: 0 auto;
 }
+
+div h3{
+	padding-top: 10px;
+}
